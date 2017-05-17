@@ -14,6 +14,15 @@ $api->version('v1', function (Router $api) {
         $api->post('reset', 'App\\Api\\V1\\Controllers\\ResetPasswordController@resetPassword');
     });
 
+    $api->group(['middleware' => 'api.auth'], function (Router $api) {
+        $api->get('commodity', 'App\\Api\\V1\\Controllers\\CommodityController@index');
+        $api->get('commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@show');
+        $api->post('commodity/store', 'App\\Api\\V1\\Controllers\\CommodityController@store');
+        $api->put('commodity', 'App\\Api\\V1\\Controllers\\CommodityController@update');
+        $api->delete('commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@destroy');
+    });
+
+
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
         $api->get('protected', function() {
             return response()->json([
