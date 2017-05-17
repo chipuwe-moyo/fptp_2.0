@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'username', 'email', 'password', 'phone_number', 'street_address', 'city', 'country'
     ];
 
     /**
@@ -37,5 +37,12 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    /**
+     * The relationship that each user has many commodities
+     */
+    public function commodities(){
+        return $this->hasMany('App\Commodity');
     }
 }
