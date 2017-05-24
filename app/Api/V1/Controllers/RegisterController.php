@@ -6,12 +6,12 @@ use Config;
 use App\User;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
-use App\Api\V1\Requests\SignUpRequest;
+use App\Api\V1\Requests\RegisterRequest;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class SignUpController extends Controller
+class RegisterController extends Controller
 {
-    public function signUp(SignUpRequest $request, JWTAuth $JWTAuth)
+    public function register(RegisterRequest $request, JWTAuth $JWTAuth)
     {
         $user = new User($request->all());
         if(!$user->save()) {

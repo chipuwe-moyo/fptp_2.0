@@ -5,7 +5,7 @@ namespace App\Api\V1\Requests;
 use Config;
 use Dingo\Api\Http\FormRequest;
 
-class SignUpRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     public function rules()
     {

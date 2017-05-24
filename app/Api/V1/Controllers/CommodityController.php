@@ -16,11 +16,13 @@ class CommodityController extends Controller
     public function index()
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
-        return $currentUser
+        $commodity = $currentUser
             ->commodities()
             ->orderBy('created_at', 'DESC')
             ->get()
             ->toArray();
+
+        return $this->response->array(['commodity' => $commodity]);
     }
 
     public function store(Request $request)
@@ -37,21 +39,9 @@ class CommodityController extends Controller
         $commodity->metric = $request->get('metric');
 
         if($currentUser->commodities()->save($commodity))
-            return $this->response->created();
+            return $this->response->array(['commodity' => $commodity]);
         else
             return $this->response->error('could_not_post_commodity', 500);
-    }
-
-    public function show($id)
-    {
-        $currentUser = JWTAuth::parseToken()->authenticate();
-
-        $commodity = $currentUser->commodities()->find($id);
-
-        if(!$commodity)
-            throw new NotFoundHttpException;
-
-        return $commodity;
     }
 
     public function update(Request $request, $id)
@@ -65,7 +55,7 @@ class CommodityController extends Controller
         $commodity->fill($request->all());
 
         if($commodity->save())
-            return $this->response->noContent();
+            return $this->response->array(['commodity' => $commodity]);
         else
             return $this->response->error('could_not_update_post', 500);
     }
@@ -80,7 +70,7 @@ class CommodityController extends Controller
             throw new NotFoundHttpException;
 
         if($commodity->delete())
-            return $this->response->noContent();
+            return $this->response->array(['message' => 'Commodity Deleted']);
         else
             return $this->response->error('could_not_delete_post', 500);
     }

@@ -7,7 +7,7 @@ $api = app(Router::class);
 
 $api->version('v1', function (Router $api) {
     $api->group(['prefix' => 'auth'], function(Router $api) {
-        $api->post('signup', 'App\\Api\\V1\\Controllers\\SignUpController@signUp');
+        $api->post('register', 'App\\Api\\V1\\Controllers\\RegisterController@register');
         $api->post('login', 'App\\Api\\V1\\Controllers\\LoginController@login');
 
         $api->post('recovery', 'App\\Api\\V1\\Controllers\\ForgotPasswordController@sendResetEmail');
@@ -15,11 +15,10 @@ $api->version('v1', function (Router $api) {
     });
 
     $api->group(['middleware' => 'api.auth'], function (Router $api) {
-        $api->get('commodity', 'App\\Api\\V1\\Controllers\\CommodityController@index');
-        $api->get('commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@show');
-        $api->post('commodity/store', 'App\\Api\\V1\\Controllers\\CommodityController@store');
-        $api->put('commodity', 'App\\Api\\V1\\Controllers\\CommodityController@update');
-        $api->delete('commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@destroy');
+        $api->get('/commodity', 'App\\Api\\V1\\Controllers\\CommodityController@index');
+        $api->post('/commodity/store', 'App\\Api\\V1\\Controllers\\CommodityController@store');
+        $api->put('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@update');
+        $api->delete('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@destroy');
     });
 
 
