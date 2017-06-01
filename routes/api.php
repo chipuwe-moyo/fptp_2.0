@@ -7,11 +7,11 @@ $api = app(Router::class);
 
 $api->version('v1', function (Router $api) {
     $api->group(['prefix' => 'auth'], function(Router $api) {
-        $api->post('register', 'App\\Api\\V1\\Controllers\\RegisterController@register');
-        $api->post('login', 'App\\Api\\V1\\Controllers\\LoginController@login');
+        $api->post('register', 'App\\Api\\V1\\Controllers\\Auth\\UserController@register');
+        $api->post('login', 'App\\Api\\V1\\Controllers\\Auth\\UserController@login');
 
-        $api->post('recovery', 'App\\Api\\V1\\Controllers\\ForgotPasswordController@sendResetEmail');
-        $api->post('reset', 'App\\Api\\V1\\Controllers\\ResetPasswordController@resetPassword');
+        $api->post('recovery', 'App\\Api\\V1\\Controllers\\Auth\\ForgotPasswordController@sendResetEmail');
+        $api->post('reset', 'App\\Api\\V1\\Controllers\\Auth\\ResetPasswordController@resetPassword');
     });
 
     $api->group(['middleware' => 'api.auth'], function (Router $api) {
