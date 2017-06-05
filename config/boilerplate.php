@@ -2,7 +2,7 @@
 
 return [
 
-    'sign_up' => [
+    'register' => [
         'release_token' => env('SIGN_UP_RELEASE_TOKEN'),
         'validation_rules' => [
             'first_name' => 'required',
