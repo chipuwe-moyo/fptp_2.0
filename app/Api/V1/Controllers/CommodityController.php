@@ -33,7 +33,6 @@ class CommodityController extends Controller
 
         $commodity->product_id = $request->get('product_id');
         $commodity->description = $request->get('description');
-        $commodity->date_posted = $request->get('date_posted');
         $commodity->price = $request->get('price');
         $commodity->quantity = $request->get('quantity');
         $commodity->metric = $request->get('metric');
