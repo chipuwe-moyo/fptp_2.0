@@ -10,7 +10,6 @@ use App\Api\V1\Requests\RegisterRequest;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Api\V1\Requests\LoginRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends Controller
 {

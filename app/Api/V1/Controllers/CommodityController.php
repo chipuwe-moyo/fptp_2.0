@@ -16,13 +16,20 @@ class CommodityController extends Controller
     public function index()
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
-        $commodity = $currentUser
+        $commodities = $currentUser
             ->commodities()
             ->orderBy('created_at', 'DESC')
             ->get()
             ->toArray();
 
-        return $this->response->array(['commodity' => $commodity]);
+        return $this->response->array(['commodities' => $commodities]);
+    }
+
+    public function viewAll()
+    {
+        $commodities = Commodity::all();
+
+        return $this->response->array(['commodities' => $commodities]);
     }
 
     public function store(Request $request)
