@@ -18,6 +18,6 @@ class FarmProduct extends Model{
      * Get the product that belongs to the commodity.
      */
     public function commodity(){
-        $this->belongsTo('App\Commodity', 'id', 'produce_id');
+        $this->belongsTo('App\Commodity', 'id', 'product_id');
     }
 }

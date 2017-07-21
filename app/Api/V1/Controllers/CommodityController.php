@@ -2,6 +2,8 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Notifications\Interest;
+use App\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\Http\Controllers\Controller;
@@ -79,5 +81,26 @@ class CommodityController extends Controller
             return $this->response->array(['message' => 'Commodity Deleted']);
         else
             return $this->response->error('could_not_delete_post', 500);
+    }
+
+
+    /**
+     * @param $id
+     * @internal param $commodity
+     */
+    public function like($id)
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $commodity = Commodity::findOrFail($id);
+        $recipient = User::findOrFail($commodity->user_id);
+        $recipient->notify(new Interest($commodity, $currentUser));
+
+        return $this->response->array([
+            'message' => 'notification',
+            'from' => $currentUser,
+            'to' => $recipient,
+            'on' => $commodity
+        ]);
     }
 }

@@ -21,6 +21,8 @@ $api->version('v1', function (Router $api) {
         $api->delete('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@destroy');
         $api->get('/commodity/all', 'App\\Api\\V1\\Controllers\\CommodityController@viewAll');
 
+        $api->post('/commodity/like/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@like');
+
         $api->get('/product', 'App\\Api\\V1\\Controllers\\FarmProductController@index');
         $api->post('/product', 'App\\Api\\V1\\Controllers\\FarmProductController@store');
         $api->put('/product/{id}', 'App\\Api\\V1\\Controllers\\FarmProductController@update');
