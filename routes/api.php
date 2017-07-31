@@ -22,8 +22,8 @@ $api->version('v1', function (Router $api) {
         $api->get('/commodity/all', 'App\\Api\\V1\\Controllers\\CommodityController@viewAll');
 
         $api->post('/commodity/like/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@like');
+        $api->get('/commodity/like/mine', 'App\\Api\\V1\\Controllers\\CommodityController@likes');
 
-        $api->get('/product', 'App\\Api\\V1\\Controllers\\FarmProductController@index');
         $api->post('/product', 'App\\Api\\V1\\Controllers\\FarmProductController@store');
         $api->put('/product/{id}', 'App\\Api\\V1\\Controllers\\FarmProductController@update');
         $api->delete('/product{id}', 'App\\Api\\V1\\Controllers\\FarmProductController@delete');
@@ -52,4 +52,6 @@ $api->version('v1', function (Router $api) {
             'message' => 'Farmer Produce Trading Platform: This is a simple example of item returned by your APIs. Everyone can see it.'
         ]);
     });
+
+    $api->get('/product', 'App\\Api\\V1\\Controllers\\FarmProductController@index');
 });

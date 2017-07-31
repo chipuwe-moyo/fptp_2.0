@@ -103,4 +103,13 @@ class CommodityController extends Controller
             'on' => $commodity
         ]);
     }
+
+    public function likes()
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $likes = $currentUser->notifications;
+
+        return $this->response->array(['likes' => $likes]);
+    }
 }
