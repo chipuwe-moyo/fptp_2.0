@@ -19,7 +19,6 @@ $api->version('v1', function (Router $api) {
         $api->post('/commodity/store', 'App\\Api\\V1\\Controllers\\CommodityController@store');
         $api->put('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@update');
         $api->delete('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@destroy');
-        $api->get('/commodity/all', 'App\\Api\\V1\\Controllers\\CommodityController@viewAll');
 
         $api->post('/commodity/like/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@like');
         $api->get('/commodity/like/mine', 'App\\Api\\V1\\Controllers\\CommodityController@likes');
@@ -54,4 +53,6 @@ $api->version('v1', function (Router $api) {
     });
 
     $api->get('/product', 'App\\Api\\V1\\Controllers\\FarmProductController@index');
+    $api->get('/commodity/all', 'App\\Api\\V1\\Controllers\\CommodityController@viewAll');
+    $api->get('/commodity/product/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@byProduct');
 });
