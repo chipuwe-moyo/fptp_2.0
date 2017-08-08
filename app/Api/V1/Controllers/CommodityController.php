@@ -2,6 +2,8 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Notifications\Interest;
+use App\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\Http\Controllers\Controller;
@@ -16,13 +18,27 @@ class CommodityController extends Controller
     public function index()
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
-        $commodity = $currentUser
+        $commodities = $currentUser
             ->commodities()
             ->orderBy('created_at', 'DESC')
             ->get()
             ->toArray();
 
-        return $this->response->array(['commodity' => $commodity]);
+        return $this->response->array(['commodities' => $commodities]);
+    }
+
+    public function viewAll()
+    {
+        $commodities = Commodity::all();
+
+        return $this->response->array(['commodities' => $commodities]);
+    }
+
+    public function byProduct($id)
+    {
+        $commodities = Commodity::all()->where('product_id', $id);
+
+        return $this->response->array(['commodities' => $commodities]);
     }
 
     public function store(Request $request)
@@ -33,10 +49,12 @@ class CommodityController extends Controller
 
         $commodity->product_id = $request->get('product_id');
         $commodity->description = $request->get('description');
-        $commodity->date_posted = $request->get('date_posted');
         $commodity->price = $request->get('price');
         $commodity->quantity = $request->get('quantity');
         $commodity->metric = $request->get('metric');
+        $commodity->town = $request->get('town');
+        $commodity->province = $request->get('province');
+        $commodity->country = $request->get('country');
 
         if($currentUser->commodities()->save($commodity))
             return $this->response->array(['commodity' => $commodity]);
@@ -73,5 +91,35 @@ class CommodityController extends Controller
             return $this->response->array(['message' => 'Commodity Deleted']);
         else
             return $this->response->error('could_not_delete_post', 500);
+    }
+
+
+    /**
+     * @param $id
+     * @internal param $commodity
+     */
+    public function like($id)
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $commodity = Commodity::findOrFail($id);
+        $recipient = User::findOrFail($commodity->user_id);
+        $recipient->notify(new Interest($commodity, $currentUser));
+
+        return $this->response->array([
+            'message' => 'notification',
+            'from' => $currentUser,
+            'to' => $recipient,
+            'on' => $commodity
+        ]);
+    }
+
+    public function likes()
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $likes = $currentUser->notifications;
+
+        return $this->response->array(['likes' => $likes]);
     }
 }

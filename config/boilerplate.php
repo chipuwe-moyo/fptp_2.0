@@ -13,6 +13,7 @@ return [
             'phone_number' => 'required|unique:users',
             'street_address' => 'required',
             'city' => 'required',
+            'province' => 'required',
             'country' => 'required'
         ]
     ],
