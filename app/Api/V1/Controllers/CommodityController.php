@@ -47,7 +47,7 @@ class CommodityController extends Controller
 
         $commodity = new Commodity;
 
-        $commodity->product_id = $request->get('product_id');
+        $commodity->product = $request->get('product');
         $commodity->description = $request->get('description');
         $commodity->price = $request->get('price');
         $commodity->quantity = $request->get('quantity');

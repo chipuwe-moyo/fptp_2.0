@@ -13,6 +13,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
+
     public function register(RegisterRequest $request, JWTAuth $JWTAuth)
     {
         $user = new User($request->all());
@@ -58,4 +59,5 @@ class UserController extends Controller
                 'token' => $token
             ], 200);
     }
+
 }

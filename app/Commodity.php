@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 
 class Commodity extends Model
 {
+    use Searchable;
     use Notifiable;
 
     /**
@@ -17,13 +19,6 @@ class Commodity extends Model
     protected $fillable = [
         'product', 'description', 'price', 'quantity', 'metric'
     ];
-
-    /**
-     * Get the type of farm product associated to commodity
-     */
-    public function farmProduct(){
-        return $this->hasOne('App\FarmProduct', 'id', 'product_id');
-    }
 
     public function user()
     {
