@@ -11,6 +11,7 @@ class Commodity extends Model
     use Searchable;
     use Notifiable;
 
+    public $asYouType = true;
     /**
      * The attributes that are mass assignable.
      *
@@ -23,5 +24,19 @@ class Commodity extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 }

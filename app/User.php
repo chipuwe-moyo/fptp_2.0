@@ -12,6 +12,7 @@ class User extends Authenticatable
     use Searchable;
     use Notifiable;
 
+    public $asYouType = true;
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +22,6 @@ class User extends Authenticatable
         'first_name', 'last_name', 'username', 'email', 'password', 'phone_number',
         'street_address', 'city', 'province', 'country'
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -47,5 +47,19 @@ class User extends Authenticatable
      */
     public function commodities(){
         return $this->hasMany('App\Commodity');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 }
