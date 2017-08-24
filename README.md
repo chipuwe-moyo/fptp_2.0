@@ -64,12 +64,6 @@ You can create endpoints in the same way you could to with using the single _din
 
 However, I added some example routes to the `routes/api.php` file to give you immediately an idea.
 
-## Cross Origin Resource Sharing
-
-If you want to enable CORS for a specific route or routes group, you just have to use the _cors_ middleware on them.
-
-Thanks to the _barryvdh/laravel-cors_ package, you can handle CORS easily. Just check <a href="https://github.com/barryvdh/laravel-cors" target="_blank">the docs at this page</a> for more info.
-
 ## Feedback
 
 I currently made this project for personal purposes. I decided to share it here to help anyone with the same needs. If you have any feedback to improve it, feel free to make a suggestion, or open a PR!
