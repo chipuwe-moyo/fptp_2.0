@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 
 class Commodity extends Model
 {
+    use Searchable;
     use Notifiable;
 
+    public $asYouType = true;
     /**
      * The attributes that are mass assignable.
      *
@@ -18,15 +21,22 @@ class Commodity extends Model
         'product', 'description', 'price', 'quantity', 'metric'
     ];
 
-    /**
-     * Get the type of farm product associated to commodity
-     */
-    public function farmProduct(){
-        return $this->hasOne('App\FarmProduct', 'id', 'product_id');
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 }

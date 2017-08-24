@@ -34,17 +34,27 @@ class CommodityController extends Controller
         return $this->response->array(['commodities' => $commodities]);
     }
 
+    public function byProduct($id)
+    {
+        $commodities = Commodity::all()->where('product_id', $id);
+
+        return $this->response->array(['commodities' => $commodities]);
+    }
+
     public function store(Request $request)
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
 
         $commodity = new Commodity;
 
-        $commodity->product_id = $request->get('product_id');
+        $commodity->product = $request->get('product');
         $commodity->description = $request->get('description');
         $commodity->price = $request->get('price');
         $commodity->quantity = $request->get('quantity');
         $commodity->metric = $request->get('metric');
+        $commodity->town = $request->get('town');
+        $commodity->province = $request->get('province');
+        $commodity->country = $request->get('country');
 
         if($currentUser->commodities()->save($commodity))
             return $this->response->array(['commodity' => $commodity]);
@@ -102,5 +112,14 @@ class CommodityController extends Controller
             'to' => $recipient,
             'on' => $commodity
         ]);
+    }
+
+    public function likes()
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $likes = $currentUser->notifications;
+
+        return $this->response->array(['likes' => $likes]);
     }
 }

@@ -10,7 +10,10 @@
         "tymon/jwt-auth": "^0.5.9",
         "dingo/api": "1.0.x@dev",
         "barryvdh/laravel-ide-helper": "v2.3.2",
-        "doctrine/dbal": "^2.5"
+      "doctrine/dbal": "^2.5",
+      "laravel/scout": "^3.0",
+      "algolia/algoliasearch-client-php": "^1.18",
+      "teamtnt/laravel-scout-tntsearch-driver": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
