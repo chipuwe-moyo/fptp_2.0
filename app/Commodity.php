@@ -18,7 +18,7 @@ class Commodity extends Model
      * @var array
      */
     protected $fillable = [
-        'product', 'description', 'price', 'quantity', 'metric'
+        'product', 'description', 'price', 'quantity', 'metric', 'photo', 'town', 'province', 'country'
     ];
 
     public function user()
