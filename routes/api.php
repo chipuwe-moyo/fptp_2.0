@@ -54,4 +54,5 @@ $api->version('v1', function (Router $api) {
     $api->get('/commodity/all', 'App\\Api\\V1\\Controllers\\CommodityController@viewAll');
     $api->get('/commodity/product/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@byProduct');
     $api->get('/search', 'App\\Api\\V1\\Controllers\\SearchController@search');
+    $api->get('/commodity/info/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@commodityInfo');
 });

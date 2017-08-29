@@ -34,11 +34,11 @@ class CommodityController extends Controller
         return $this->response->array(['commodities' => $commodities]);
     }
 
-    public function byProduct($id)
+    public function commodityInfo($id)
     {
-        $commodities = Commodity::all()->where('product_id', $id);
+        $commodity = Commodity::find($id);
 
-        return $this->response->array(['commodities' => $commodities]);
+        return $this->response->array(['commodity' => $commodity]);
     }
 
     public function store(Request $request)
@@ -48,13 +48,16 @@ class CommodityController extends Controller
         $commodity = new Commodity;
 
         $commodity->product = $request->get('product');
-        $commodity->description = $request->get('description');
+        $commodity->description = $request->get('description', false);
         $commodity->price = $request->get('price');
         $commodity->quantity = $request->get('quantity');
         $commodity->metric = $request->get('metric');
         $commodity->town = $request->get('town');
         $commodity->province = $request->get('province');
         $commodity->country = $request->get('country');
+        if ($request->hasFile('photo')) {
+            $commodity->photo = $request->file('photo')->store('img/commodities');
+        }
 
         if($currentUser->commodities()->save($commodity))
             return $this->response->array(['commodity' => $commodity]);

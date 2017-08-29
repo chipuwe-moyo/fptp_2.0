@@ -4,11 +4,13 @@ namespace App\Api\V1\Controllers;
 
 use App\Commodity;
 use App\User;
+use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SearchController extends Controller
 {
+    use Helpers;
     public function search(Request $request)
     {
         // First we define the error message we are going to show if no keywords
@@ -18,15 +20,10 @@ class SearchController extends Controller
         // Making sure the user entered a keyword.
         if ($request->has('q')) {
             $commodities = Commodity::search($request->get('q'))->get();
-            $users = User::search($request->get('q'))->get();
 
-            return
-                [
-                    $commodities->count() ? $commodities : $error,
-                    $users->count() ? $users : $error
-                ];
+            return $this->response->array(['commodities' => $commodities->count() ? $commodities : $error]);
         }
 
-        return $error;
+        return $this->response->array(['error' => $error]);
     }
 }
