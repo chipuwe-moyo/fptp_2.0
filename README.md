@@ -6,7 +6,6 @@ It is built on top of three big guys:
 
 * JWT-Auth - [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
 * Dingo API - [dingo/api](https://github.com/dingo/api)
-* Laravel-CORS [barryvdh/laravel-cors](http://github.com/barryvdh/laravel-cors)
 
 What I made is an integration of these three packages and a setup of some authentication and credentials recovery methods.
 
@@ -24,7 +23,6 @@ I wrote a couple of articles on this project that explain how to write an entire
 Just be aware that some options in the `config/boilerplate.php` file are changed, so take a look to it.
 
 * [How to Build an API-Only JWT-Powered Laravel App](https://www.sitepoint.com/how-to-build-an-api-only-jwt-powered-laravel-app/)
-* [How to Consume Laravel API with AngularJS](https://www.sitepoint.com/how-to-consume-laravel-api-with-angularjs/)
 
 **WARNING:** the articles are old and Laravel 5.1 related. Just use them as "inspiration". Even without updated tutorials, they should be enough. 
 
@@ -37,7 +35,7 @@ You don't have to worry about authentication and password recovery anymore. I cr
 For each controller there's an already setup route in `routes/api.php` file:
 
 * `POST api/auth/login`, to do the login and get your access token;
-* `POST api/auth/signup`, to create a new user into your application;
+* `POST api/auth/register`, to create a new user into your application;
 * `POST api/auth/recovery`, to recover your credentials;
 * `POST api/auth/reset`, to reset your password after the recovery;
 
