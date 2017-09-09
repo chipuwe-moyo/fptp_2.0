@@ -98,31 +98,35 @@ class CommodityController extends Controller
 
 
     /**
+     * @param Request $request
      * @param $id
+     * @return
      * @internal param $commodity
      */
-    public function like($id)
+    public function notify(Request $request, $id)
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
 
         $commodity = Commodity::findOrFail($id);
         $recipient = User::findOrFail($commodity->user_id);
-        $recipient->notify(new Interest($commodity, $currentUser));
+        $message = $request->get('message');
+
+        $recipient->notify(new Interest($commodity, $currentUser, $message));
 
         return $this->response->array([
-            'message' => 'notification',
+            'message' => $message,
             'from' => $currentUser,
             'to' => $recipient,
             'on' => $commodity
         ]);
     }
 
-    public function likes()
+    public function notifications()
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
 
-        $likes = $currentUser->notifications;
+        $notifications = $currentUser->notifications;
 
-        return $this->response->array(['likes' => $likes]);
+        return $this->response->array(['notifications' => $notifications]);
     }
 }
