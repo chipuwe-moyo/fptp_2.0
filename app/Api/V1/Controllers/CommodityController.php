@@ -108,7 +108,7 @@ class CommodityController extends Controller
         $currentUser = JWTAuth::parseToken()->authenticate();
 
         $commodity = Commodity::findOrFail($id);
-        $recipient = User::findOrFail($commodity->user_id);
+        $recipient = User::findOrFail($request->get('recipient'));
         $message = $request->get('message');
 
         $recipient->notify(new Interest($commodity, $currentUser, $message));
