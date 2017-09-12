@@ -20,8 +20,8 @@ $api->version('v1', function (Router $api) {
         $api->put('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@update');
         $api->delete('/commodity/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@destroy');
 
-        $api->post('/commodity/like/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@like');
-        $api->get('/commodity/like/mine', 'App\\Api\\V1\\Controllers\\CommodityController@likes');
+        $api->post('/commodity/notify/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@notify');
+        $api->get('/commodity/notifications', 'App\\Api\\V1\\Controllers\\CommodityController@notifications');
 
         $api->get('/user', 'App\\Api\\V1\\Controllers\\ProfileController@myUserInfo');
         $api->put('/user/update', 'App\\Api\\V1\\Controllers\\ProfileController@update');
@@ -52,7 +52,10 @@ $api->version('v1', function (Router $api) {
     });
 
     $api->get('/commodity/all', 'App\\Api\\V1\\Controllers\\CommodityController@viewAll');
-    $api->get('/commodity/product/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@byProduct');
-    $api->get('/search', 'App\\Api\\V1\\Controllers\\SearchController@search');
     $api->get('/commodity/info/{id}', 'App\\Api\\V1\\Controllers\\CommodityController@commodityInfo');
+
+    $api->get('/search', 'App\\Api\\V1\\Controllers\\SearchController@search');
+
+    $api->post('/product', 'App\\Api\\V1\\Controllers\\ProductController@store');
+    $api->get('/product/all', 'App\\Api\\V1\\Controllers\\ProductController@allProducts');
 });

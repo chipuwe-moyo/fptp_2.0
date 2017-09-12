@@ -3,7 +3,6 @@
 namespace App\Api\V1\Controllers;
 
 use App\Commodity;
-use App\User;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

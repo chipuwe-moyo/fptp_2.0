@@ -19,10 +19,11 @@ class Interest extends Notification
      * @param $commodity
      * @param $from
      */
-    public function __construct($commodity, $from)
+    public function __construct($commodity, $from, $message)
     {
         $this->from = $from;
         $this->commodity = $commodity;
+        $this->message = $message;
     }
 
     /**
@@ -60,7 +61,8 @@ class Interest extends Notification
     {
         return [
             'commodity_id' => $this->commodity->id,
-            'user_id' => $this->from->id
+            'user_id' => $this->from->id,
+            'message' => $this->message
         ];
     }
 }
