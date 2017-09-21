@@ -3,6 +3,7 @@
 namespace App\Api\V1\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use JWTAuth;
@@ -19,6 +20,20 @@ class ProfileController extends Controller
             throw new NotFoundHttpException;
 
         return $this->response->array($currentUser);
+    }
+
+    public function viewAll()
+    {
+        $users = User::all();
+
+        return $this->response->array(['users' => $users]);
+    }
+
+    public function userInfo($id)
+    {
+        $user = User::find($id);
+
+        return $this->response->array(['user' => $user]);
     }
 
     public function update(Request $request)
