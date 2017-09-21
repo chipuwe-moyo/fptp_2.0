@@ -24,6 +24,8 @@ $api->version('v1', function (Router $api) {
         $api->get('/commodity/notifications', 'App\\Api\\V1\\Controllers\\CommodityController@notifications');
 
         $api->get('/user/info', 'App\\Api\\V1\\Controllers\\ProfileController@myUserInfo');
+        $api->get('/user/all', 'App\\Api\\V1\\Controllers\\ProfileController@viewAll');
+        $api->get('/user/{id}', 'App\\Api\\V1\\Controllers\\ProfileController@userInfo');
         $api->put('/user/update', 'App\\Api\\V1\\Controllers\\ProfileController@update');
     });
 
